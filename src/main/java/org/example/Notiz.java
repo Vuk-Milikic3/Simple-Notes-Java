@@ -4,7 +4,7 @@ public class Notiz {
     private String titel;
     private String text;
 
-    public Notiz(String titel, String text){
+    public Notiz(String titel, String text) {
         this.titel = titel;
         this.text = text;
     }
@@ -25,9 +25,3 @@ public class Notiz {
         this.text = text;
     }
 }
-
-
-
-
-
-
