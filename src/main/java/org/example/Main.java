@@ -15,7 +15,7 @@ public class Main {
                 System.out.println("Willkommen, " + username + "!");
             }
 
-            System.out.println("\nMenü:");
+            System.out.println("\nMenue:");
             System.out.println("1. Ordner erstellen");
             System.out.println("2. Ordner anzeigen");
             System.out.println("3. Ordner betreten");
@@ -33,16 +33,43 @@ public class Main {
                     currentUser.addOrdner(new Ordner(ordnerName));
                     System.out.println("Ordner '" + ordnerName + "' wurde erstellt.");
                     break;
+
                 case 2:
                     if (currentUser.getAllOrdner().isEmpty()) {
                         System.out.println("Es gibt keine Ordner.");
                     } else {
                         System.out.println("Ordner:");
-                        for (Ordner ordner : currentUser.getAllOrdner()) {
-                            System.out.println("- " + ordner.getName());
+                        for (int i = 0; i < currentUser.getAllOrdner().size(); i++) {
+                            System.out.println((i + 1) + ". " + currentUser.getAllOrdner().get(i).getName());
+                        }
+                        System.out.print("Wähle einen Ordner zum Verwalten (0 zum Abbrechen): ");
+                        int ordnerNummer = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (ordnerNummer == 0) break;
+                        if (ordnerNummer < 1 || ordnerNummer > currentUser.getAllOrdner().size()) {
+                            System.out.println("Ungültige Auswahl.");
+                        } else {
+                            Ordner ausgewahlterOrdner = currentUser.getAllOrdner().get(ordnerNummer - 1);
+                            System.out.println("1. Ordner löschen");
+                            System.out.println("2. Ordner umbenennen");
+                            System.out.print("Wähle eine Option (0 zum Abbrechen): ");
+                            int verwaltenOption = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (verwaltenOption == 1) {
+                                currentUser.getAllOrdner().remove(ordnerNummer - 1);
+                                System.out.println("Ordner gelöscht.");
+                            } else if (verwaltenOption == 2) {
+                                System.out.print("Gib den neuen Namen für den Ordner ein: ");
+                                String neuerName = scanner.nextLine();
+                                ausgewahlterOrdner.setName(neuerName);
+                                System.out.println("Ordner wurde umbenannt.");
+                            }
                         }
                     }
                     break;
+
                 case 3:
                     if (currentUser.getAllOrdner().isEmpty()) {
                         System.out.println("Es gibt keine Ordner. Bitte erstelle zuerst einen Ordner.");
@@ -58,18 +85,21 @@ public class Main {
                         if (ordnerNummer < 1 || ordnerNummer > currentUser.getAllOrdner().size()) {
                             System.out.println("Ungültige Auswahl.");
                         } else {
-                            Ordner ausgewählterOrdner = currentUser.getAllOrdner().get(ordnerNummer - 1);
-                            handleOrdner(scanner, ausgewählterOrdner);
+                            Ordner ausgewahlterOrdner = currentUser.getAllOrdner().get(ordnerNummer - 1);
+                            handleOrdner(scanner, ausgewahlterOrdner);
                         }
                     }
                     break;
+
                 case 4:
                     currentUser = null;
                     System.out.println("Benutzer wurde abgemeldet.");
                     break;
+
                 case 5:
                     System.out.println("Programm beendet. Tschüss!");
                     return;
+
                 default:
                     System.out.println("Ungültige Option. Bitte wähle erneut.");
             }
@@ -94,20 +124,52 @@ public class Main {
                     System.out.print("Gib den Text der Notiz ein: ");
                     String notizText = scanner.nextLine();
                     ordner.addNotiz(new Notiz(notizTitel, notizText));
-                    System.out.println("Notiz wurde hinzugefügt.");
+                    System.out.println("Notiz wurde hinzugefuegt.");
                     break;
+
                 case 2:
                     if (ordner.getNotizen().isEmpty()) {
                         System.out.println("Es gibt keine Notizen in diesem Ordner.");
                     } else {
                         System.out.println("Notizen in '" + ordner.getName() + "':");
-                        for (Notiz notiz : ordner.getNotizen()) {
-                            System.out.println("- " + notiz.getTitel() + ": " + notiz.getText());
+                        for (int i = 0; i < ordner.getNotizen().size(); i++) {
+                            Notiz notiz = ordner.getNotizen().get(i);
+                            System.out.println((i + 1) + ". " + notiz.getTitel() + ": " + notiz.getText());
+                        }
+                        System.out.print("Wähle eine Notiz zum Verwalten (0 zum Abbrechen): ");
+                        int notizNummer = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (notizNummer == 0) break;
+                        if (notizNummer < 1 || notizNummer > ordner.getNotizen().size()) {
+                            System.out.println("Ungültige Auswahl.");
+                        } else {
+                            Notiz ausgewaehlteNotiz = ordner.getNotizen().get(notizNummer - 1);
+                            System.out.println("1. Notiz löschen");
+                            System.out.println("2. Notiz bearbeiten");
+                            System.out.print("Wähle eine Option (0 zum Abbrechen): ");
+                            int notizOption = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (notizOption == 1) {
+                                ordner.getNotizen().remove(notizNummer - 1);
+                                System.out.println("Notiz gelöscht.");
+                            } else if (notizOption == 2) {
+                                System.out.print("Gib den neuen Titel der Notiz ein: ");
+                                String neuerTitel = scanner.nextLine();
+                                System.out.print("Gib den neuen Text der Notiz ein: ");
+                                String neuerText = scanner.nextLine();
+                                ausgewaehlteNotiz.setTitel(neuerTitel);
+                                ausgewaehlteNotiz.setText(neuerText);
+                                System.out.println("Notiz wurde bearbeitet.");
+                            }
                         }
                     }
                     break;
+
                 case 3:
                     return;
+
                 default:
                     System.out.println("Ungültige Option. Bitte wähle erneut.");
             }
