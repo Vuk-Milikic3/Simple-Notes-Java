@@ -40,7 +40,7 @@ public class Main {
                     } else {
                         System.out.println("Ordner:");
                         for (int i = 0; i < currentUser.getAllOrdner().size(); i++) {
-                            System.out.println((i + 1) + ". " + currentUser.getAllOrdner().get(i).getName());
+                            System.out.println((i + 1) + ". " + currentUser.getAllOrdner().get(i));
                         }
                         System.out.print("Wähle einen Ordner zum Verwalten (0 zum Abbrechen): ");
                         int ordnerNummer = scanner.nextInt();
@@ -76,7 +76,7 @@ public class Main {
                     } else {
                         System.out.println("Wähle einen Ordner aus:");
                         for (int i = 0; i < currentUser.getAllOrdner().size(); i++) {
-                            System.out.println((i + 1) + ". " + currentUser.getAllOrdner().get(i).getName());
+                            System.out.println((i + 1) + ". " + currentUser.getAllOrdner().get(i));
                         }
                         System.out.print("Nummer des Ordners: ");
                         int ordnerNummer = scanner.nextInt();
@@ -111,7 +111,7 @@ public class Main {
             System.out.println("\nOrdner: " + ordner.getName());
             System.out.println("1. Notiz erstellen");
             System.out.println("2. Notizen anzeigen");
-            System.out.println("3. Zurück zum Hauptmenü");
+            System.out.println("3. Zurück zum Hauptmenue");
             System.out.print("Wähle eine Option: ");
 
             int option = scanner.nextInt();
@@ -124,7 +124,7 @@ public class Main {
                     System.out.print("Gib den Text der Notiz ein: ");
                     String notizText = scanner.nextLine();
                     ordner.addNotiz(new Notiz(notizTitel, notizText));
-                    System.out.println("Notiz wurde hinzugefuegt.");
+                    System.out.println("Notiz wurde hinzugefügt.");
                     break;
 
                 case 2:
@@ -133,8 +133,7 @@ public class Main {
                     } else {
                         System.out.println("Notizen in '" + ordner.getName() + "':");
                         for (int i = 0; i < ordner.getNotizen().size(); i++) {
-                            Notiz notiz = ordner.getNotizen().get(i);
-                            System.out.println((i + 1) + ". " + notiz.getTitel() + ": " + notiz.getText());
+                            System.out.println((i + 1) + ". " + ordner.getNotizen().get(i));
                         }
                         System.out.print("Wähle eine Notiz zum Verwalten (0 zum Abbrechen): ");
                         int notizNummer = scanner.nextInt();
@@ -171,7 +170,7 @@ public class Main {
                     return;
 
                 default:
-                    System.out.println("Ungültige Option. Bitte wähle erneut.");
+                    System.out.println("Ungültige Option. Bitte waehle erneut.");
             }
         }
     }

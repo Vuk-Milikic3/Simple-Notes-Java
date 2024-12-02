@@ -24,4 +24,12 @@ public class Notiz {
     public void setText(String text) {
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "---------------------------\n" +
+                "Titel: " + titel + "\n" +
+                "Text: " + text + "\n" +
+                "---------------------------";
+    }
 }

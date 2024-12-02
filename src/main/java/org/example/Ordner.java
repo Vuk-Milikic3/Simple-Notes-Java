@@ -27,4 +27,12 @@ public class Ordner {
     public List<Notiz> getNotizen() {
         return notizen;
     }
+
+    @Override
+    public String toString() {
+        return "---------------------------\n" +
+                "Ordner: " + name + "\n" +
+                "Notizen: " + notizen.size() + " Notiz(en)\n" +
+                "---------------------------";
+    }
 }
